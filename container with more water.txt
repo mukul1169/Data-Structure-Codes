@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Source {
+   public static void main(String args[]) {
+       Scanner s = new Scanner(System.in);
+       int n = s.nextInt();
+       int[] arr = new int[n];
+       for (int i = 0; i < n; i++)
+           arr[i] = s.nextInt();
+       maxVolumeWater(arr, n);
+   }
+
+   // Method to find maximum volume of water that can be stored
+   static void maxVolumeWater(int[] arr, int n) {
+       // Write your code here
+       int li=0;
+       int ri=n-1;
+       int vol=0;
+       while(li<ri)
+       {
+           vol=Math.max(vol,(ri-li)*Math.min(arr[li],arr[ri])*5);
+           if(arr[li]<arr[ri])
+             li++;
+           else
+             ri--;
+       }
+       System.out.print(vol+" cubic units");
+   }
+}
