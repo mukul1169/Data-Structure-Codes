@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+class Source {
+
+   static void allBinaryNumbers(int targetLength, String str, int n) {
+
+       /* If size of the binary number is equal to given target length */
+       if (n == targetLength) {
+
+           /* Print the binary number and return */
+           System.out.println(str);
+           return;
+       }
+
+       /* If the last bit of the binary number is 1, */
+       if (str.charAt(n - 1) == '1') {
+
+           /* then add 0 to it, and */
+           str += "0";
+
+           /* Recursively add the remaining bits to the binary number */
+           allBinaryNumbers(targetLength, str, n + 1);
+       }
+
+       /* If the last bit of the binary number is 0, then */
+       if (str.charAt(n - 1) == '0') {
+
+           /* Add 0 to the binary number, recursively add the
+           remaining bits */
+           str += "0";
+           allBinaryNumbers(targetLength, str, n + 1);
+
+           /* Now, remove that 0 that was added above */
+           str = str.substring(0, str.length() - 1);
+
+           /* Add 1 to the binary number, recursively add the
+           remaining bits */
+           str += "1";
+           allBinaryNumbers(targetLength, str, n + 1);
+       }
+   }
+
+   public static void main(String arg[]) {
+       Scanner in = new Scanner(System.in);
+
+       /* Get the input integer */
+       int targetLength = in.nextInt();
+
+       /* If the given input integer is 0, then return*/
+       if (targetLength == 0) {
+           return;
+       }
+
+       String str;
+
+       str = "0";
+       /* Get all binary numbers starting with 0 */
+       allBinaryNumbers(targetLength, str, 1);
+
+       str = "1";
+       /* Get all binary numbers starting with 1 */
+       allBinaryNumbers(targetLength, str, 1);
+   }
+}
